@@ -18,13 +18,14 @@ nvim/
 │   │       ├── vue.lua          # Vue LSP 配置
 │   │       └── astro.lua        # Astro LSP 配置
 │   └── plugins/                  # 插件定義（模組化）
-│       ├── extras.lua           # LazyVim extras 導入
 │       ├── lsp.lua              # LSP 插件配置
 │       ├── treesitter.lua       # Treesitter 語法解析
 │       ├── formatting.lua       # 格式化和 Linting (conform.nvim + nvim-lint)
 │       ├── dap.lua              # 調試器配置 (nvim-dap + nvim-dap-go + dapui)
 │       └── testing.lua          # 測試框架 (neotest + neotest-go)
 └── DEVELOPMENT_PLAN.md          # 開發規劃文檔
+
+注意: LazyVim extras 已整合至 lua/config/lazy.lua 以符合正確的加載順序
 ```
 
 ## 🎯 模組說明
@@ -53,16 +54,27 @@ nvim/
 **設計理念**: 按功能分類插件，每個文件負責一個領域。
 
 #### `extras.lua`
-導入 LazyVim 官方 extras，自動啟用對應語言支持：
-- `lazyvim.plugins.extras.lang.go`
-- `lazyvim.plugins.extras.lang.typescript`
-- `lazyvim.plugins.extras.lang.vue`
-- `lazyvim.plugins.extras.lang.astro`
-- `lazyvim.plugins.extras.lang.tailwind`
-- `lazyvim.plugins.extras.formatting.prettier`
-- `lazyvim.plugins.extras.linting.eslint`
-- `lazyvim.plugins.extras.dap.core`
-- `lazyvim.plugins.extras.test.core`
+~~導入 LazyVim 官方 extras，自動啟用對應語言支持~~
+
+**已移至 `lua/config/lazy.lua`**：為了符合 LazyVim 的正確加載順序，LazyVim extras 現在直接在 `lazy.lua` 中導入：
+
+```lua
+spec = {
+  { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+  -- LazyVim extras
+  { import = "lazyvim.plugins.extras.lang.go" },
+  { import = "lazyvim.plugins.extras.lang.typescript" },
+  { import = "lazyvim.plugins.extras.lang.vue" },
+  { import = "lazyvim.plugins.extras.lang.astro" },
+  { import = "lazyvim.plugins.extras.lang.tailwind" },
+  { import = "lazyvim.plugins.extras.formatting.prettier" },
+  { import = "lazyvim.plugins.extras.linting.eslint" },
+  { import = "lazyvim.plugins.extras.dap.core" },
+  { import = "lazyvim.plugins.extras.test.core" },
+  -- 自定義插件
+  { import = "plugins" },
+}
+```
 
 #### `lsp.lua`
 配置 `nvim-lspconfig`，定義所有 LSP 伺服器設定。
@@ -143,7 +155,10 @@ npm install -g @tailwindcss/language-server
 
 1. 在 `lua/config/lsp/` 創建新模組，例如 `python.lua`
 2. 在 `lua/plugins/lsp.lua` 的 `servers` 中添加配置
-3. 在 `lua/plugins/extras.lua` 導入對應的 LazyVim extra（如有）
+3. 在 `lua/config/lazy.lua` 的 spec 中添加對應的 LazyVim extra（如有）：
+   ```lua
+   { import = "lazyvim.plugins.extras.lang.python" },
+   ```
 
 ### 修改快捷鍵
 

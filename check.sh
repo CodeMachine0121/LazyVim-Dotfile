@@ -56,7 +56,7 @@ check_node_env() {
   check_tool "npm" "npm"
   check_tool "typescript-language-server" "TypeScript LSP"
   check_tool "vue-language-server" "Vue LSP"
-  check_tool "astro-languageserver" "Astro LSP"
+  check_tool "astro-ls" "Astro LSP"
   check_tool "prettier" "Prettier (格式化)"
   check_tool "eslint_d" "ESLint (Linting)"
   check_tool "tailwindcss-language-server" "Tailwind CSS LSP (可選)"

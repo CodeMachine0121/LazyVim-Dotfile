@@ -1,6 +1,8 @@
 # 💤 LazyVim 開發環境配置
 
-基於 [LazyVim](https://github.com/LazyVim/LazyVim) 的模組化開發環境，支持：
+> 🎯 **基於 [LazyVim](https://github.com/LazyVim/LazyVim) 定制調整** - 本項目在 LazyVim 基礎上進行了優化和擴展，以支持多語言開發和高效工作流。
+
+模組化開發環境，支持：
 
 - 🐹 **Go**: LSP (gopls) + 調試 (delve) + 測試 (neotest)
 - 🎨 **前端**: TypeScript/JavaScript, Vue 3, React, Astro
@@ -16,7 +18,7 @@
 ./install.sh
 ```
 
-或手動安裝（詳見 `CONFIG_ARCHITECTURE.md`）
+或手動安裝（詳見 [配置架構說明](docs/CONFIG_ARCHITECTURE.md)）
 
 ### 2. 啟動 Neovim
 
@@ -80,13 +82,29 @@ lua/
 
 ## 📚 文檔
 
-- [配置架構說明](CONFIG_ARCHITECTURE.md) - 詳細的模組化設計說明
-- [開發規劃](DEVELOPMENT_PLAN.md) - 完整的需求和實施計劃
+- [快速開始指南](docs/QUICKSTART.md) - 詳細的安裝和使用步驟
+- [Go 測試指南](docs/TEST_GUIDE.md) - **完整的 Go 測試使用說明** ⭐
+- [Neotest 速查表](docs/NEOTEST_CHEATSHEET.md) - **測試快捷鍵一覽** 🚀
+- [配置架構說明](docs/CONFIG_ARCHITECTURE.md) - 詳細的模組化設計說明
+- [開發規劃](docs/DEVELOPMENT_PLAN.md) - 完整的需求和實施計劃
+- [疑難排解](docs/TROUBLESHOOTING.md) - 常見問題解決方案
+- [修復總結導航](docs/FIX_SUMMARY_NAVIGATION.md) - 修復內容總結
+- [Git 提交指南](docs/GIT_COMMIT.md) - 提交規範說明
 - [LazyVim 文檔](https://lazyvim.github.io/)
 
 ## 🔧 自定義
 
-參見 `CONFIG_ARCHITECTURE.md` 了解如何：
+參見 [配置架構說明](docs/CONFIG_ARCHITECTURE.md) 了解如何：
 - 添加新的 LSP
 - 修改快捷鍵
 - 添加格式化工具
+
+## ❓ 常見問題
+
+**Q: `<leader>tt` 測試不工作？**  
+A: LazyVim extras 提供了測試功能。按 `<leader>t` 查看所有測試快捷鍵，或參見 [疑難排解指南](docs/TROUBLESHOOTING.md)
+
+**Q: Astro LSP 顯示未安裝？**  
+A: 執行文件名是 `astro-ls`，運行 `./check.sh` 應該能正確檢測到
+
+更多問題請查看 [疑難排解指南](docs/TROUBLESHOOTING.md)
