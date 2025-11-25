@@ -40,11 +40,11 @@
    - `<leader>tr` (run nearest) 需要光標在測試函數內
    - 如果不確定，使用 `<leader>tt` 運行整個文件
 
-5. **檢查 neotest-go adapter 是否註冊**:
+5. **檢查 neotest-golang adapter 是否註冊**:
    ```vim
    :lua vim.print(require("neotest").state.adapter_ids())
    ```
-   應該看到 "neotest-go"
+   應該看到 "neotest-golang"
 
 6. **查看測試樹**:
    ```vim
@@ -104,6 +104,48 @@ func TestSubtract(t *testing.T) {
    ```bash
    go test -v
    ```
+
+### 1.5. 在目錄層級運行測試失敗 (`no Go files in ...`)
+
+**原因**: 當你在測試摘要窗口的目錄節點(如 `internal/`)上按 `r` 時,目錄本身可能沒有 Go 文件,只有子目錄有測試文件。
+
+**症狀**:
+```
+no Go files in /path/to/internal
+```
+
+**解決方案**:
+
+1. **運行具體的子目錄而不是空目錄**:
+   - 在摘要窗口按 `o` 展開目錄
+   - 移動到有實際 Go 文件的子目錄上
+   - 然後按 `r` 運行該子目錄的測試
+
+2. **或在終端運行包含子目錄的測試**:
+   ```bash
+   # 在項目根目錄
+   go test ./internal/... -v
+   ```
+
+3. **或使用快捷鍵運行整個項目**:
+   ```vim
+   <leader>tT  # 運行所有測試
+   ```
+
+**完整示例**:
+```
+neotest-golang
+╰╮ internal              ← ❌ 不要在這裡按 r
+ ├╮ authentication       ← ✅ 在這裡按 r
+ │├╮ controllers
+ ││╰─ admin_controller_test.go
+ │╰╮ services
+ │ ├─ admin_account_service_test.go
+ │ ╰─ user_account_service_test.go
+ ╰╮ fitness              ← ✅ 在這裡按 r
+  ├╮ models
+  ...
+```
 
 ### 2. Astro LSP 沒有安裝
 
@@ -304,9 +346,11 @@ astro-ls --version
 ## 📝 獲取幫助
 
 1. **LazyVim 文檔**: https://lazyvim.github.io/
-2. **檢查健康**: `:checkhealth`
-3. **查看快捷鍵**: `<leader>` 然後等待 which-key 顯示
-4. **LazyVim 討論**: https://github.com/LazyVim/LazyVim/discussions
+2. **neotest-golang 文檔**: https://fredrikaverpil.github.io/neotest-golang/
+3. **neotest-golang GitHub**: https://github.com/fredrikaverpil/neotest-golang
+4. **檢查健康**: `:checkhealth`
+5. **查看快捷鍵**: `<leader>` 然後等待 which-key 顯示
+6. **LazyVim 討論**: https://github.com/LazyVim/LazyVim/discussions
 
 ## 🐛 報告問題
 
@@ -315,5 +359,6 @@ astro-ls --version
 1. Neovim 版本: `:version`
 2. 健康檢查: `:checkhealth`
 3. LSP 日誌: `:LspLog`
-4. 錯誤訊息: 按 `<leader>xx` 查看 trouble 列表
-5. 配置文件內容
+4. neotest adapter 狀態: `:lua vim.print(require("neotest").state.adapter_ids())`
+5. 錯誤訊息: 按 `<leader>xx` 查看 trouble 列表
+6. 配置文件內容

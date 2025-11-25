@@ -1,5 +1,7 @@
 # Go 測試快速指南
 
+> **注意**: 本配置使用 [neotest-golang](https://github.com/fredrikaverpil/neotest-golang) adapter,這是一個更可靠的 neotest Go adapter,專門解決目錄層級測試和 monorepo 支持。
+
 ## 🧪 測試文件要求
 
 ### 1. 文件命名
@@ -331,5 +333,6 @@ myproject/
 
 - [Go Testing 官方文檔](https://golang.org/pkg/testing/)
 - [Neotest 文檔](https://github.com/nvim-neotest/neotest)
-- [neotest-go 文檔](https://github.com/nvim-neotest/neotest-go)
+- [neotest-golang 文檔](https://fredrikaverpil.github.io/neotest-golang/)
+- [neotest-golang GitHub](https://github.com/fredrikaverpil/neotest-golang)
 - [TROUBLESHOOTING.md](TROUBLESHOOTING.md) - 疑難排解指南
